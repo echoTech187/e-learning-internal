@@ -44,7 +44,7 @@ class LessonProgress extends ResourceController
             $progressModel->update($existing['id'], $updateData);
             $record = $progressModel->find($existing['id']);
         } else {
-            $newId = \Ramsey\Uuid\Uuid::uuid4()->toString();
+            $newId = sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x', mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0x0fff) | 0x4000, mt_rand(0, 0x3fff) | 0x8000, mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff));
             $progressModel->insert([
                 'id'           => $newId,
                 'user_id'      => $userId,

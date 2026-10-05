@@ -119,7 +119,7 @@ class Quizzes extends ResourceController
         }
 
         $now       = date('Y-m-d H:i:s');
-        $attemptId = \Ramsey\Uuid\Uuid::uuid4()->toString();
+        $attemptId = sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x', mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0x0fff) | 0x4000, mt_rand(0, 0x3fff) | 0x8000, mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff));
 
         $attemptModel->insert([
             'id'           => $attemptId,
@@ -205,7 +205,7 @@ class Quizzes extends ResourceController
             if ($isCorrect) $earnedPoints += (int) $q['points'];
 
             $answerRecords[] = [
-                'id'          => \Ramsey\Uuid\Uuid::uuid4()->toString(),
+                'id'          => sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x', mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0x0fff) | 0x4000, mt_rand(0, 0x3fff) | 0x8000, mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)),
                 'attempt_id'  => $attemptId,
                 'question_id' => $qId,
                 'answer'      => $userAnswer,
