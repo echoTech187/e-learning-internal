@@ -127,12 +127,4 @@ _modules/*
 test_midtrans.php
 
 node_modules
-temp.html
-temp2.html
-temp3.html
-test_join.php
-test_midtrans.php
 out.css
-
-generate_users.php
-seed_dash.php
