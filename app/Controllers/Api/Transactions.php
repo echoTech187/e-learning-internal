@@ -244,7 +244,11 @@ class Transactions extends ResourceController
     public function enrollments($userId)
     {
         $db = \Config\Database::connect();
-        $enrollments = $db->table('enrollments')->where('user_id', $userId)->get()->getResultArray();
+        $builder = $db->table('enrollments');
+        $builder->select('enrollments.*, courses.title as course_title, courses.slug as course_slug, courses.thumbnail as course_thumbnail');
+        $builder->join('courses', 'courses.id = enrollments.course_id', 'left');
+        $builder->where('enrollments.user_id', $userId);
+        $enrollments = $builder->get()->getResultArray();
         return $this->respond(['success' => true, 'data' => $enrollments]);
     }
 
