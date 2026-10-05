@@ -36,6 +36,11 @@ class Users extends ResourceController
         $userId = $data['user_id'] ?? null;
         $role = $data['role'] ?? null;
         $profileData = $data['profile'] ?? []; 
+        $referredBy = $data['referred_by'] ?? null;
+        $interests = $data['interests'] ?? null;
+        $profession = $data['profession'] ?? null;
+        $birthDate = $data['birth_date'] ?? null;
+        $parentEmail = $data['parent_email'] ?? null;
 
         if (!$userId || !$role) return $this->failValidationErrors('Mohon lengkapi data profil Anda.');
 
@@ -44,6 +49,21 @@ class Users extends ResourceController
             $updateData['phone'] = $profileData['phone_number'];
         } elseif (isset($profileData['phone'])) {
             $updateData['phone'] = $profileData['phone'];
+        }
+        if ($profession) {
+            $updateData['profession'] = $profession;
+        }
+        if ($birthDate) {
+            $updateData['birth_date'] = $birthDate;
+        }
+        if ($parentEmail) {
+            $updateData['parent_email'] = $parentEmail;
+        }
+        if ($referredBy) {
+            $updateData['referred_by'] = $referredBy;
+        }
+        if ($interests) {
+            $updateData['interests'] = json_encode($interests);
         }
         
         $this->model->update($userId, $updateData);
